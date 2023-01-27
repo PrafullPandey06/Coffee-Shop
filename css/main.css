@@ -1,0 +1,492 @@
+@import url('https://fonts.googleapis.com/css?family=La+Belle+Aurore|Open+Sans');
+
+
+:root{
+ --brightYellow:#E3B505;
+ --darkBrown:#BB9457;
+ --yellow:rgb(242, 180, 80); 
+ --brown:#382923;
+ --black:#191919;
+ --grey:#A9B2AC;
+}
+
+*{
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box; /* https://www.w3schools.com/css/css3_box-sizing.asp . without border box padding width border height will behave abnormly*/
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)),url('../img/bodyBcg.jpeg');
+  color : var(--black); /* make entire background black untill specified*/
+}
+
+/* global Styles .bell "it is starting with . so it is a class for css"*/
+.bell-fonts {
+   font-family: 'La Belle Aurore', cursive;
+}
+
+/*global css for about section*/
+
+/*section-padding*/
+.section-padding {
+  padding: 3rem 0; /*up,bottom - 3rem . left,right 0*/
+}
+/*grid container*/
+.grid-container {
+  max-width: 90vw; /*vw = view width*/
+  margin: 2rem auto; /*top bottom ,right left*/
+  display: grid;
+  grid-row-gap: 2rem; /*since display is grid so each child will be treated as a row*/
+}
+/*for bigger screen*/
+@media screen and (min-width:768px) {
+  .grid-container-medium-2{
+    display: grid;
+    grid-template-columns: 1fr 1fr; /*2 column of equal size in a row*/
+    grid-column-gap : 4rem;
+  }
+  .grid-container{
+    max-width: 75vw;
+  }
+}
+/*section*/
+.section-title{
+  padding: 1rem 0.5rem;
+}
+.section-title_left{
+  margin: 10rem;
+}
+.section-title_name{
+  font-size: 3rem;
+  text-transform: capitalize;
+}
+.section-title_underline{
+  background: var(--yellow);
+  width: 5rem;
+  height: 0.25rem;
+}
+.section-tile_text{
+  letter-spacing: 0.1rem;
+  line-height: 1.5;
+  margin-top: 1rem;
+  color: gray;
+}
+
+/* end of global styles */
+
+/*preloader*/
+.preloader{
+  position: fixed;
+  top: 0%; /*all these 4 attributes makes entire window*/
+  left: 0%;
+  right: 0%;
+  bottom: 0%;
+  background: var(--brightYellow);
+  z-index: 999; /*while page is loading only preloader must be seen*/
+  display: grid;
+  justify-content: center; /*it will put gif to horizontal center*/
+  align-items: center; /*it will put gif to vertical center*/
+}
+/*end of preloader*/
+
+/* header */
+.header{
+  height : 100vh; /*no matter window size height will be 100 view height */
+  display: grid; /*so that header and icons will be in 1 grid only*/
+  grid-template-columns: 80%;
+  justify-content: center; /*moves content to center*/
+  align-items: center;
+  position: relative; /*after applying css on header whenever we will do styling we will do it relative to header only*/
+}
+@media  screen and (max-width:768px) {
+  /*when window size will be <= 768px than background video will stop and background image will be there only and for that image we will define new header */
+  .header {
+    background: url('../img/headerBcg.jpeg')center/cover fixed no-repeat;
+    /*
+    background-position: center;
+    background-size: cover;// image will cover entire background and upto cover order matters i.e. position -> size
+    
+    background-attachment: fixed; /*it specifies whether background image will scroll or it will be fixed
+    background-repeat: no-repeat;/*if background image is small than it will repeat but we does not want it to repeat
+    */
+  }
+}
+
+/* banner */
+
+.banner {
+  text-align: center;
+  z-index: 3;
+}
+.banner__title {
+  font-size: 4rem; /*rem is dynamic pixel for anyones pc*/
+  text-transform: capitalize;
+  color: var(--brightYellow);
+}
+@media screen and (min-width : 768px) {
+  .banner__title {
+    font-size: 9rem;
+  }
+}
+.banner__social-icon {
+  display: block;
+  text-decoration: none;
+  color: var(--black);
+  border: 0.1rem solid var(--black);
+  border-radius: 50%;
+  padding : 0.25rem;
+  transition: all 0.5s linear; /*this is like all icons when hover will transit smoothly*/
+}
+.banner__social-icon:hover {
+  background: var(--brightYellow);
+  color: var(--black);
+}
+.banner__icons {
+  width: 50%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4,2rem); /*4 columns of 2rem each*/
+  grid-column-gap: 0.5rem;
+  justify-content: center;
+}
+
+.video_container{
+  position: absolute; /*video container is child of Header it is inside header but outside banner so it's position is absolute and since it's positionis absolute so we can set it;s size*/
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /*The z-index property specifies the stack order of an element.
+An element with greater stack order is always in front of an element with a lower stack order. so basically if z-index of video is greater than banner that only video will be showed not food junkie banner*/
+}
+
+.video_item{
+  width: 100%; /*width of height of any container class is relative to theit parent container since video_conatiner is parent container of video_item so we are making video_item is size of video_container and similarly video_contaier is child container of header*/
+  height: 100%;
+  object-fit: cover; /*cover actial parent container it's property is same as background cover but instead it convers entire parnet container*/
+}
+
+/*nav Button*/
+.navBtn {
+  position: fixed; /*it's position will be fixed no matte what window size*/
+  top: 5%;
+  right: 5%;
+  font-size: 3.5rem;
+  color: var(--brightYellow);
+  cursor: pointer;
+  animation-name: pulse;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+/*nav animation*/
+@keyframes pulse {
+  0% {
+      transform: scale(1); /*scale(1) == original size*/
+  }
+  25% {
+     transform: scale(1.25); /*1.25 times of original size is transformed*/
+  }
+  50%{
+     transform: scale(1.5);
+  }
+  100% {
+     transform: scale(1);
+  }
+}
+
+/* nav */
+.nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: rgba(242,180,80,0.9);
+  z-index: 3;
+
+   /*this section of nav is for javascript this is for when we want to toggle the nav bar by touching button */
+   width: 0;
+   overflow: hidden;
+   transition: all 0.3s linear;
+}
+
+/*this class is not in HTML it is only in css so that we can fetch this class in javascript and than toggle the nav because we've hidden then nav bar by previous .nav*/
+.nav_show{
+  width: 10rem;
+}
+
+.nav_links{
+  list-style-type: none;
+}
+
+.nav__single-link{
+  display: block;
+  text-decoration: none;
+  text-transform: capitalize;
+  color: var(--brown);
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  transition: all 0.5s ease-in-out; /*all hover effects applied and we can see all changes in interval of 0.5seconds smoothly*/
+}
+
+.nav__single-link:hover{
+  background: var(--brown);
+  color: rgba(242,180,80,0.9);
+  padding : 1.5rem
+}
+.nav_logo:hover{
+  background: var(--grey);
+}
+
+/*video switch*/
+.video_switch-container{
+  display: none; /*when window size is small there is no meaning of switch off video button*/
+}
+
+@media  screen and (min-width:768px) {
+  .video_switch-container{
+    display: block;
+    position: absolute; /*it's parent container is header so when header goes down i.e. when video scrolls down than we don't need this button*/
+    bottom: 5%;
+    right: 5%;
+    z-index: 3; /*otherwise button will not be shown because of video*/
+  }
+
+  .video_switch{
+    position: relative; /*it's position is relative to position of video_switch container because when we hover button in switch then we should move relative to parent container i.e video_switch-container*/
+    width: 5rem;
+    background: var(--yellow);
+    text-transform: uppercase;
+    display: flex; /*it is not just a box but many small boxes inside big box in thsi case 2 boxes namely ON and OFF*/
+    justify-content: space-between;
+    padding: 0.25rem;
+    cursor: pointer;
+    border-radius: 0.5rem; /*it gives curvature shape to rectangular button*/
+  }
+
+  .video_switch-button{
+    position: absolute; /*to video_switch*/
+    top: 0%;
+    left: 0%;
+    height: 100%;
+    width: 50%;
+    background: var(--brown);
+    border-radius: 0.5rem;
+    transition: all 0.3s ease-out;
+  }
+
+  /*initially button is off so now we're creating a class to move buttons i.e. this will be used in javascript only*/
+  .btnSlide {
+    left: 50%; /*so that ON will appear*/
+  }
+}
+
+/* about */
+.about-container{
+  /*it is parent container for section title and image*/
+  display: grid;
+  grid-template-columns: 100%; /*we want 1 column of full length per row*/
+  grid-template-rows: auto 1fr; /*since text comes before image so auto is for text and 1fr distacne betwen image and text*/
+  grid-gap : 2rem;
+}
+.about_img-item {
+  width: 100%;
+  display: block;
+  height: 100%;
+  border-radius: 0.25rem;
+}
+@media screen and (min-width:768px) {
+  .about_img-special{
+    order: -1; /*in grid css eveything has order 0 so since we want to flip img 2 above text2 so we will decrease it's order*/
+  }
+  .about-container{
+    grid-template-rows: 1fr 1fr; /*1 equal space between rows */
+  }
+}
+
+/*drink section*/
+.drink{
+  background: var(--brown);
+  color: var(--brightYellow);
+  text-transform: capitalize;
+}
+/*we will treat drink-form and drink-card as one*/
+.drink-form,.drink-card{
+  text-align: center;
+  display: grid; /*drink-form and drink-card are 1 column*/
+  grid-template-columns: 70%;
+  justify-content: center; /*it is property of grid to align content into center*/
+  grid-row-gap:1.25rem; /*only 1 column but many rows*/
+}
+
+/*drink form- feedback*/
+.drink-form_feedback{
+  border: 0.1rem solid var(--brightYellow);
+  padding: 0.25rem;
+  display: none; /*we will add funcnality using javascript*/
+}
+/*classes for javascript*/
+.error{
+  display: block;
+  color: red;
+  border-color: red;
+}
+.success{
+  display: block;
+  color: green;
+  border-color: green;
+}
+
+.drink-form_title,.drink-card_title{
+  font-size: 3rem;
+}
+.input-name,.input-lastname,.input-email{
+  width: 100%; /*parent grid is 70% ie.drink-form and drink-card*/
+}
+.input-name,.input-lastname,.input-email,.input-submit{
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: rgba(111,87,77,0.6);
+  color: var(--darkBrown);
+  border:none; /*to make white border disapper*/
+  outline: none; /*we we select the border it will show some outline so we don't want it*/
+}
+.input-name::placeholder,.input-lastname::placeholder,.input-email::placeholder{
+  color: var(--darkBrown);
+  text-transform: capitalize;
+}
+.input-submit{
+  background: var(--yellow);
+  color: var(--black);
+  transition: all 0.5s linear;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.input-submit:hover{
+  opacity: 0.4; /*is effective bcoz of transition*/
+}
+/*now form is done*/
+/*it's time for lucky people*/
+.drink-card_list{
+  display: grid;
+  grid-template-columns: 100%;
+  grid-row-gap: 2rem;
+}
+.person{
+  display: grid;
+  grid-template-columns: auto auto 1fr; /*class person has 3 components image,name,lastname so first auto is for image 2nd is for first name and last name is 1fr i.e. parent container is 100%spanning so after removing space for 2 auto whatever space is remaining it will go to last name*/
+  align-items: center;
+  text-align: left; /*for first name*/
+  grid-gap:1rem;
+  border: 0.1rem solid rgba(111,87,77,0.6);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+}
+.person_thumbnai{
+  /*this class is for making image round*/
+  border-radius: 50%;
+}
+
+@media screen and (min-width:768px) {
+  .drink-card_list{
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+  }
+}
+
+/*work section*/
+.work-container{
+  /*it is parent container for all images*/
+  max-width: 90vw;
+  margin: 2rem auto;
+}
+.work-item_img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  transition: all 1s linear; /*when we hover so all transistion in 1s and sommthly*/
+}
+
+.work-item{
+  background: linear-gradient(var(--yellow), var(-yellow));
+  overflow: hidden; /*when we hover the image so it goes out of work-item so to cntrol it*/
+  position: relative; /*for work-item_icon it is relative*/
+}
+
+.work-item:hover .work-item_img{
+  opacity: 0.5; /*as we hover we are making image more transparent*/
+  transform: scale(1.3); /*hover on zoom*/
+}
+
+.work-item_icon{
+  position: absolute;
+  color: var(--brightYellow);
+  top: 50%;
+  left: 50%;
+  display: inline-block;
+  font-size: 4rem;
+  text-decoration: none;
+  transition: all 0.5s ease; /*bcoz hover*/
+  transform: scale(0); /*only show if hover*/
+}
+.work-item:hover .work-item_icon{
+  transform: scale(1.3) translate(-50%,-50%); /*translate is like positioning during hover first -50% is for x-axis and 2nd is for y-axis*/
+}
+.work-item_icon:hover{
+  color: var(--brown);
+  cursor: pointer;
+}
+
+@media screen and (min-width:576px) {
+  .work-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+  }
+}
+
+/*designing custom grid layout*/
+@media screen and (min-width:992px) {
+  .work-container{
+    height: 100vh;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: repeat(4,1fr);
+    grid-template-areas: /*4 rows and 4 columns total 16 blocks now we will*/
+     "one one two three" /*decide in what block which image will go*/
+     "one one four four"/*one and seven spans 4 blocks like so on*/
+     "five six seven seven"
+     "eight nine seven seven" 
+    
+  }
+  .item1{
+    grid-area: one;
+  }
+  .item2{
+    grid-area: two;
+  }
+  .item3{
+    grid-area: three;
+  }
+  .item4{
+    grid-area: four;
+  }
+  .item5{
+    grid-area: five;
+  }
+  .item6{
+    grid-area: six;
+  }
+  .item7{
+    grid-area: seven;
+  }
+  .item8{
+    grid-area: eight;
+  }
+  .item9{
+    grid-area: nine;
+  }
+}
